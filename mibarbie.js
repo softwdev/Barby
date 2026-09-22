@@ -16,6 +16,7 @@ document.addEventListener("DOMContentLoaded", () => {
         isAnimating = true;
         
         mainText.classList.remove('pulse');
+        mainText.classList.add('yellow-text');
         mainText.title = "";
         
         moveRandomly(mainText);
