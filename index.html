@@ -10,156 +10,397 @@
     <div id="container">
         <div id="main-text" class="barby-text">barby</div>
         <div id="lily-container">
-            <svg id="lily-svg" viewBox="0 0 500 500" xmlns="http://www.w3.org/2000/svg">
+            <svg id="lily-svg" viewBox="0 0 600 560" xmlns="http://www.w3.org/2000/svg">
               <defs>
-                <filter id="blur">
-                    <feGaussianBlur stdDeviation="3"/>
+
+                <!-- Shadows / blur -->
+                <filter id="soft-shadow" x="-20%" y="-20%" width="140%" height="140%">
+                  <feDropShadow dx="2" dy="4" stdDeviation="4" flood-color="rgba(0,0,0,0.25)"/>
                 </filter>
-                
-                <linearGradient id="leaf-grad" x1="0%" y1="0%" x2="0%" y2="100%">
-                    <stop offset="0%" stop-color="#8BC34A"/>
-                    <stop offset="100%" stop-color="#2E7D32"/>
+                <filter id="glow-shadow" x="-20%" y="-20%" width="140%" height="140%">
+                  <feDropShadow dx="0" dy="6" stdDeviation="6" flood-color="rgba(0,0,0,0.18)"/>
+                </filter>
+
+                <!-- Leaf gradient -->
+                <linearGradient id="leaf-g" x1="0%" y1="0%" x2="100%" y2="100%">
+                  <stop offset="0%" stop-color="#6DBE47"/>
+                  <stop offset="50%" stop-color="#4CAF50"/>
+                  <stop offset="100%" stop-color="#2E7D32"/>
                 </linearGradient>
 
-                <radialGradient id="petal-back" cx="50%" cy="90%" r="100%">
-                    <stop offset="0%" stop-color="#FF8F00"/>
-                    <stop offset="40%" stop-color="#FFC107"/>
-                    <stop offset="100%" stop-color="#FFEB3B"/>
+                <!-- Bud gradient -->
+                <linearGradient id="bud-g" x1="0%" y1="0%" x2="100%" y2="100%">
+                  <stop offset="0%" stop-color="#C5E1A5"/>
+                  <stop offset="40%" stop-color="#F9A825"/>
+                  <stop offset="100%" stop-color="#388E3C"/>
+                </linearGradient>
+
+                <!-- Main petal gradients - bright yellow like reference photos -->
+                <radialGradient id="pg-main" cx="50%" cy="85%" r="90%">
+                  <stop offset="0%" stop-color="#E65100"/>
+                  <stop offset="20%" stop-color="#F57F17"/>
+                  <stop offset="45%" stop-color="#FFB300"/>
+                  <stop offset="75%" stop-color="#FFD54F"/>
+                  <stop offset="100%" stop-color="#FFF9C4"/>
                 </radialGradient>
 
-                <radialGradient id="petal-front" cx="50%" cy="10%" r="100%">
-                    <stop offset="0%" stop-color="#FF8F00"/>
-                    <stop offset="30%" stop-color="#FFC107"/>
-                    <stop offset="70%" stop-color="#FFEB3B"/>
-                    <stop offset="100%" stop-color="#FFF59D"/>
-                </radialGradient>
-                
-                <radialGradient id="bud-grad" cx="20%" cy="20%" r="80%">
-                    <stop offset="0%" stop-color="#DCE775"/>
-                    <stop offset="50%" stop-color="#FFF176"/>
-                    <stop offset="100%" stop-color="#8BC34A"/>
+                <radialGradient id="pg-side" cx="30%" cy="80%" r="95%">
+                  <stop offset="0%" stop-color="#E65100"/>
+                  <stop offset="25%" stop-color="#F57F17"/>
+                  <stop offset="55%" stop-color="#FFA000"/>
+                  <stop offset="85%" stop-color="#FFD740"/>
+                  <stop offset="100%" stop-color="#FFF8E1"/>
                 </radialGradient>
 
-                <path id="front-petal" d="M -15,0 C -55,40 -35,110 0,140 C 35,110 55,40 15,0 C 10,15 -10,15 -15,0 Z" fill="url(#petal-front)"/>
-                <path id="front-petal-vein" d="M 0,0 Q 0,70 0,130" stroke="#FBC02D" stroke-width="1.5" fill="none" opacity="0.6"/>
+                <radialGradient id="pg-back" cx="50%" cy="50%" r="80%">
+                  <stop offset="0%" stop-color="#FF8F00"/>
+                  <stop offset="40%" stop-color="#FFC107"/>
+                  <stop offset="80%" stop-color="#FFE082"/>
+                  <stop offset="100%" stop-color="#FFF3E0"/>
+                </radialGradient>
 
-                <path id="back-petal" d="M -12,0 C -45,-40 -25,-100 0,-130 C 25,-100 45,-40 12,0 Z" fill="url(#petal-back)"/>
-                <path id="back-petal-vein" d="M 0,0 Q 0,-60 0,-120" stroke="#F57F17" stroke-width="1.5" fill="none" opacity="0.5"/>
-                
-                <g id="spots-group" opacity="0.6">
-                    <circle cx="-15" cy="-5" r="1.5" fill="#BF360C"/>
-                    <circle cx="-25" cy="10" r="1" fill="#BF360C"/>
-                    <circle cx="-10" cy="15" r="1.5" fill="#BF360C"/>
-                    <circle cx="-35" cy="0" r="1.2" fill="#BF360C"/>
-                    
-                    <circle cx="15" cy="-5" r="1.5" fill="#BF360C"/>
-                    <circle cx="25" cy="10" r="1" fill="#BF360C"/>
-                    <circle cx="10" cy="15" r="1.5" fill="#BF360C"/>
-                    <circle cx="35" cy="0" r="1.2" fill="#BF360C"/>
-                    
-                    <circle cx="0" cy="15" r="1.5" fill="#BF360C"/>
-                    <circle cx="-5" cy="25" r="1" fill="#BF360C"/>
-                    <circle cx="5" cy="25" r="1.2" fill="#BF360C"/>
-                    <circle cx="0" cy="35" r="1" fill="#BF360C"/>
-                </g>
+                <radialGradient id="pg-curl" cx="60%" cy="20%" r="80%">
+                  <stop offset="0%" stop-color="#FFECB3"/>
+                  <stop offset="50%" stop-color="#FFD54F"/>
+                  <stop offset="100%" stop-color="#FF8F00"/>
+                </radialGradient>
 
-                <g id="stamens-angled">
-                    <path d="M 0,15 Q -25,-15 -45,-30" stroke="#DCE775" stroke-width="2.5" fill="none"/>
-                    <ellipse cx="-45" cy="-30" rx="3.5" ry="10" fill="#3E2723" transform="rotate(45 -45 -30)"/>
-                    
-                    <path d="M 0,15 Q -10,-35 -15,-60" stroke="#DCE775" stroke-width="2.5" fill="none"/>
-                    <ellipse cx="-15" cy="-60" rx="3.5" ry="10" fill="#3E2723" transform="rotate(15 -15 -60)"/>
-                    
-                    <path d="M 0,15 Q 15,-35 25,-55" stroke="#DCE775" stroke-width="2.5" fill="none"/>
-                    <ellipse cx="25" cy="-55" rx="3.5" ry="10" fill="#3E2723" transform="rotate(-20 25 -55)"/>
-                    
-                    <path d="M 0,15 Q 35,-15 55,-25" stroke="#DCE775" stroke-width="2.5" fill="none"/>
-                    <ellipse cx="55" cy="-25" rx="3.5" ry="10" fill="#3E2723" transform="rotate(-45 55 -25)"/>
-                    
-                    <path d="M 0,15 Q -40,10 -60,0" stroke="#DCE775" stroke-width="2.5" fill="none"/>
-                    <ellipse cx="-60" cy="0" rx="3.5" ry="10" fill="#3E2723" transform="rotate(70 -60 0)"/>
-                    
-                    <path d="M 0,15 Q 40,10 60,-5" stroke="#DCE775" stroke-width="2.5" fill="none"/>
-                    <ellipse cx="60" cy="-5" rx="3.5" ry="10" fill="#3E2723" transform="rotate(-65 60 -5)"/>
+                <!-- Throat center of flower -->
+                <radialGradient id="throat-g" cx="50%" cy="50%" r="50%">
+                  <stop offset="0%" stop-color="#388E3C"/>
+                  <stop offset="60%" stop-color="#558B2F"/>
+                  <stop offset="100%" stop-color="#E65100"/>
+                </radialGradient>
 
-                    <path d="M 0,15 Q 0,-30 5,-75" stroke="#8BC34A" stroke-width="4" fill="none"/>
-                    <path d="M 0,-76 Q 5,-82 10,-76" stroke="#558B2F" stroke-width="5" fill="none" stroke-linecap="round"/>
-                </g>
-
-                <g id="lily-angled">
-                    <use href="#back-petal" transform="rotate(-55)" />
-                    <use href="#back-petal-vein" transform="rotate(-55)" />
-                    
-                    <use href="#back-petal" transform="rotate(0)" />
-                    <use href="#back-petal-vein" transform="rotate(0)" />
-                    
-                    <use href="#back-petal" transform="rotate(55)" />
-                    <use href="#back-petal-vein" transform="rotate(55)" />
-                    
-                    <ellipse cx="0" cy="5" rx="18" ry="12" fill="#E65100" opacity="0.6" filter="url(#blur)"/>
-                    <use href="#spots-group" transform="translate(0, -10) scale(0.8)"/>
-                    
-                    <use href="#stamens-angled"/>
-                    
-                    <use href="#front-petal" transform="rotate(65)" />
-                    <use href="#front-petal-vein" transform="rotate(65)" />
-                    
-                    <use href="#front-petal" transform="rotate(-65)" />
-                    <use href="#front-petal-vein" transform="rotate(-65)" />
-                    
-                    <use href="#front-petal" transform="rotate(0)" />
-                    <use href="#front-petal-vein" transform="rotate(0)" />
-                    
-                    <use href="#spots-group" transform="translate(0, 15) scale(0.9)"/>
-                    <path d="M -15,10 C 0,30 15,10 0,25 Z" fill="#FFB300" filter="url(#blur)"/>
-                </g>
-                
-                <g id="lily-bud">
-                    <path d="M -15,0 C -25,-40 0,-80 0,-90 C 0,-80 25,-40 15,0 Z" fill="url(#bud-grad)"/>
-                    <path d="M 0,0 Q -10,-40 0,-90" stroke="#8BC34A" stroke-width="1" fill="none"/>
-                    <path d="M 0,0 Q 10,-40 0,-90" stroke="#8BC34A" stroke-width="1" fill="none"/>
-                    <path d="M -15,0 Q 0,15 15,0 Q 0,25 -15,0 Z" fill="#4CAF50"/>
-                </g>
-
-                <g id="lily-leaf">
-                    <path d="M 0,0 C 20,-30 15,-80 0,-110 C -15,-80 -20,-30 0,0 Z" fill="url(#leaf-grad)"/>
-                    <path d="M 0,0 Q 0,-55 0,-110" stroke="#1B5E20" stroke-width="1.5" fill="none"/>
-                </g>
               </defs>
-              
-              <g id="bouquet" transform="translate(0, 10)">
-                  <!-- Stems -->
-                  <path d="M 255,480 Q 350,250 380,150" stroke="#4CAF50" stroke-width="6" fill="none"/>
-                  <path d="M 245,480 Q 150,250 130,120" stroke="#4CAF50" stroke-width="5" fill="none"/>
-                  <path d="M 240,480 Q 180,350 130,250" stroke="#4CAF50" stroke-width="7" fill="none"/>
-                  <path d="M 260,480 Q 320,350 370,260" stroke="#4CAF50" stroke-width="7" fill="none"/>
-                  <path d="M 250,480 Q 250,300 250,220" stroke="#4CAF50" stroke-width="9" fill="none"/>
-                  
-                  <!-- Back Leaves -->
-                  <use href="#lily-leaf" transform="translate(330, 260) rotate(45) scale(1.2)"/>
-                  <use href="#lily-leaf" transform="translate(180, 270) rotate(-50) scale(1)"/>
-                  
-                  <!-- Buds -->
-                  <use href="#lily-bud" transform="translate(380, 150) scale(0.8) rotate(30)"/>
-                  <use href="#lily-bud" transform="translate(130, 120) scale(0.7) rotate(-40)"/>
-                  
-                  <!-- Mid Leaves -->
-                  <use href="#lily-leaf" transform="translate(250, 350) rotate(-60) scale(1.3)"/>
-                  <use href="#lily-leaf" transform="translate(260, 400) rotate(70) scale(1.5)"/>
-                  <use href="#lily-leaf" transform="translate(200, 430) rotate(-40) scale(1.1)"/>
-                  <use href="#lily-leaf" transform="translate(300, 320) rotate(50) scale(1.2)"/>
-                  
-                  <!-- Back Flowers -->
-                  <use href="#lily-angled" transform="translate(130, 260) scale(0.9) rotate(-35)"/>
-                  <use href="#lily-angled" transform="translate(370, 270) scale(0.95) rotate(35)"/>
-                  
-                  <!-- Front Center Flower -->
-                  <use href="#lily-angled" transform="translate(250, 210) scale(1.2)"/>
-                  
-                  <!-- Foreground Leaves -->
-                  <use href="#lily-leaf" transform="translate(250, 450) rotate(-30) scale(1.4)"/>
-                  <use href="#lily-leaf" transform="translate(250, 480) rotate(40) scale(1.3)"/>
+
+              <!-- ==================== BACKGROUND STEMS ==================== -->
+              <!-- Main center stem -->
+              <path d="M 300,555 C 298,500 295,420 292,350 C 290,290 295,230 300,180" 
+                    stroke="#388E3C" stroke-width="9" fill="none" stroke-linecap="round"/>
+              <!-- Left stem -->
+              <path d="M 297,555 C 270,490 220,420 175,340 C 155,305 140,265 128,220" 
+                    stroke="#2E7D32" stroke-width="7" fill="none" stroke-linecap="round"/>
+              <!-- Right stem -->
+              <path d="M 303,555 C 330,490 380,410 420,340 C 445,300 460,255 465,210" 
+                    stroke="#388E3C" stroke-width="7" fill="none" stroke-linecap="round"/>
+              <!-- Far left stem (small bud) -->
+              <path d="M 294,555 C 255,480 190,390 145,310 C 120,265 108,210 100,155" 
+                    stroke="#2E7D32" stroke-width="5" fill="none" stroke-linecap="round"/>
+              <!-- Far right stem (small bud) -->
+              <path d="M 306,555 C 360,470 430,380 475,295 C 498,250 508,195 505,145" 
+                    stroke="#388E3C" stroke-width="5" fill="none" stroke-linecap="round"/>
+
+              <!-- ==================== BACKGROUND LEAVES ==================== -->
+              <!-- Far left leaf -->
+              <path d="M 140,300 C 100,280 70,240 55,195 C 90,200 115,230 140,300 Z" 
+                    fill="url(#leaf-g)" opacity="0.9"/>
+              <path d="M 140,300 C 110,260 80,225 55,195" stroke="#2E7D32" stroke-width="1.5" fill="none"/>
+
+              <!-- Far right leaf -->
+              <path d="M 460,295 C 500,275 530,240 545,190 C 510,195 480,228 460,295 Z" 
+                    fill="url(#leaf-g)" opacity="0.9"/>
+              <path d="M 460,295 C 490,255 520,225 545,190" stroke="#2E7D32" stroke-width="1.5" fill="none"/>
+
+              <!-- Left mid leaf -->
+              <path d="M 195,370 C 150,355 115,320 95,275 C 130,278 165,310 195,370 Z" 
+                    fill="url(#leaf-g)"/>
+              <path d="M 195,370 C 155,340 120,308 95,275" stroke="#1B5E20" stroke-width="1.5" fill="none"/>
+
+              <!-- Right mid leaf -->
+              <path d="M 405,365 C 450,350 485,315 505,268 C 470,272 438,305 405,365 Z" 
+                    fill="url(#leaf-g)"/>
+              <path d="M 405,365 C 445,338 478,308 505,268" stroke="#1B5E20" stroke-width="1.5" fill="none"/>
+
+              <!-- ==================== FAR LEFT BUD ==================== -->
+              <g filter="url(#soft-shadow)">
+                <!-- Bud sepals -->
+                <path d="M 100,160 C 88,140 80,110 85,80 C 92,95 96,125 100,160 Z" fill="#4CAF50"/>
+                <path d="M 100,160 C 112,138 118,108 115,78 C 107,93 104,124 100,160 Z" fill="#388E3C"/>
+                <!-- Bud petals peeking -->
+                <path d="M 100,158 C 93,135 90,108 92,80 C 97,95 100,125 100,158 Z" fill="#FFD54F"/>
+                <path d="M 100,158 C 107,134 110,106 108,78 C 103,93 100,124 100,158 Z" fill="#FFC107"/>
+                <!-- Bud tip -->
+                <ellipse cx="100" cy="78" rx="10" ry="6" fill="#66BB6A" transform="rotate(-5 100 78)"/>
               </g>
+
+              <!-- ==================== FAR RIGHT BUD ==================== -->
+              <g filter="url(#soft-shadow)">
+                <path d="M 505,150 C 493,128 487,98 492,68 C 499,83 502,114 505,150 Z" fill="#4CAF50"/>
+                <path d="M 505,150 C 517,127 521,97 518,66 C 510,81 507,112 505,150 Z" fill="#388E3C"/>
+                <path d="M 505,148 C 498,125 496,98 498,70 C 502,85 505,114 505,148 Z" fill="#FFD54F"/>
+                <path d="M 505,148 C 512,124 514,96 511,68 C 507,83 505,113 505,148 Z" fill="#FFC107"/>
+                <ellipse cx="505" cy="66" rx="10" ry="6" fill="#66BB6A" transform="rotate(8 505 66)"/>
+              </g>
+
+              <!-- ==================== LEFT FLOWER (side/angled view) ==================== -->
+              <g filter="url(#glow-shadow)">
+                <!-- Lower petals curling away (back layer) -->
+                <path d="M 130,228 C 80,240 42,228 18,200 C 50,190 92,200 130,228 Z" 
+                      fill="url(#pg-side)" opacity="0.9"/>
+                <path d="M 130,228 C 112,255 100,290 110,320 C 125,295 132,262 130,228 Z" 
+                      fill="url(#pg-side)" opacity="0.85"/>
+                <!-- Back upper petal -->
+                <path d="M 128,222 C 108,185 102,145 115,110 C 128,140 132,178 128,222 Z" 
+                      fill="url(#pg-back)" opacity="0.9"/>
+
+                <!-- Front three main petals -->
+                <!-- Left curling petal -->
+                <path d="M 128,225 C 72,208 38,175 25,135 C 55,148 90,175 128,225 Z" 
+                      fill="url(#pg-main)"/>
+                <path d="M 128,225 C 82,212 50,182 25,135" stroke="#FF8F00" stroke-width="1.5" fill="none" opacity="0.5"/>
+
+                <!-- Top left petal -->
+                <path d="M 128,220 C 95,180 88,135 100,90 C 118,125 126,168 128,220 Z" 
+                      fill="url(#pg-main)"/>
+                <path d="M 128,220 C 105,178 100,135 100,90" stroke="#FF8F00" stroke-width="1.5" fill="none" opacity="0.5"/>
+
+                <!-- Top right petal (curling out) -->
+                <path d="M 132,218 C 158,178 172,138 168,95 C 148,125 138,168 132,218 Z" 
+                      fill="url(#pg-curl)"/>
+                <path d="M 132,218 C 155,178 168,138 168,95" stroke="#FF8F00" stroke-width="1" fill="none" opacity="0.5"/>
+
+                <!-- Right petal sweeping out -->
+                <path d="M 135,225 C 175,212 215,195 240,170 C 208,170 175,190 135,225 Z" 
+                      fill="url(#pg-main)"/>
+
+                <!-- Throat/center -->
+                <ellipse cx="130" cy="222" rx="16" ry="12" fill="url(#throat-g)" transform="rotate(-10 130 222)"/>
+
+                <!-- Stamens -->
+                <line x1="130" y1="218" x2="95" y2="178" stroke="#C8E6C9" stroke-width="2.5"/>
+                <ellipse cx="94" cy="176" rx="4" ry="6" fill="#4E342E" transform="rotate(-35 94 176)"/>
+
+                <line x1="130" y1="218" x2="108" y2="170" stroke="#C8E6C9" stroke-width="2.5"/>
+                <ellipse cx="107" cy="168" rx="4" ry="6" fill="#5D4037" transform="rotate(-15 107 168)"/>
+
+                <line x1="130" y1="218" x2="130" y2="166" stroke="#C8E6C9" stroke-width="2.5"/>
+                <ellipse cx="130" cy="164" rx="4" ry="6" fill="#4E342E"/>
+
+                <line x1="130" y1="218" x2="152" y2="170" stroke="#C8E6C9" stroke-width="2.5"/>
+                <ellipse cx="153" cy="168" rx="4" ry="6" fill="#5D4037" transform="rotate(15 153 168)"/>
+
+                <line x1="130" y1="218" x2="168" y2="182" stroke="#C8E6C9" stroke-width="2.5"/>
+                <ellipse cx="169" cy="180" rx="4" ry="6" fill="#4E342E" transform="rotate(30 169 180)"/>
+
+                <!-- Pistil -->
+                <line x1="130" y1="215" x2="130" y2="158" stroke="#A5D6A7" stroke-width="3.5"/>
+                <ellipse cx="130" cy="156" rx="5" ry="4" fill="#66BB6A"/>
+              </g>
+
+              <!-- ==================== RIGHT FLOWER (side/angled view) ==================== -->
+              <g filter="url(#glow-shadow)">
+                <!-- Back petals -->
+                <path d="M 468,218 C 520,228 558,215 582,188 C 550,180 508,192 468,218 Z" 
+                      fill="url(#pg-side)" opacity="0.9"/>
+                <path d="M 468,218 C 486,245 498,280 488,312 C 474,286 468,252 468,218 Z" 
+                      fill="url(#pg-side)" opacity="0.85"/>
+                <path d="M 470,214 C 490,177 496,137 483,102 C 470,132 466,170 470,214 Z" 
+                      fill="url(#pg-back)" opacity="0.9"/>
+
+                <!-- Front petals -->
+                <!-- Right curling petal -->
+                <path d="M 470,215 C 526,198 560,165 573,125 C 543,138 508,165 470,215 Z" 
+                      fill="url(#pg-main)"/>
+                <path d="M 470,215 C 516,202 548,172 573,125" stroke="#FF8F00" stroke-width="1.5" fill="none" opacity="0.5"/>
+
+                <!-- Top right petal -->
+                <path d="M 470,210 C 503,170 510,125 498,80 C 480,115 472,158 470,210 Z" 
+                      fill="url(#pg-main)"/>
+
+                <!-- Top left petal curling -->
+                <path d="M 466,208 C 440,168 426,128 430,85 C 450,115 460,158 466,208 Z" 
+                      fill="url(#pg-curl)"/>
+
+                <!-- Left sweeping petal -->
+                <path d="M 463,215 C 423,202 383,185 358,160 C 390,160 423,180 463,215 Z" 
+                      fill="url(#pg-main)"/>
+
+                <!-- Throat -->
+                <ellipse cx="468" cy="212" rx="16" ry="12" fill="url(#throat-g)" transform="rotate(10 468 212)"/>
+
+                <!-- Stamens -->
+                <line x1="468" y1="208" x2="504" y2="168" stroke="#C8E6C9" stroke-width="2.5"/>
+                <ellipse cx="505" cy="166" rx="4" ry="6" fill="#4E342E" transform="rotate(35 505 166)"/>
+
+                <line x1="468" y1="208" x2="490" y2="160" stroke="#C8E6C9" stroke-width="2.5"/>
+                <ellipse cx="491" cy="158" rx="4" ry="6" fill="#5D4037" transform="rotate(15 491 158)"/>
+
+                <line x1="468" y1="208" x2="468" y2="156" stroke="#C8E6C9" stroke-width="2.5"/>
+                <ellipse cx="468" cy="154" rx="4" ry="6" fill="#4E342E"/>
+
+                <line x1="468" y1="208" x2="446" y2="160" stroke="#C8E6C9" stroke-width="2.5"/>
+                <ellipse cx="445" cy="158" rx="4" ry="6" fill="#5D4037" transform="rotate(-15 445 158)"/>
+
+                <line x1="468" y1="208" x2="430" y2="172" stroke="#C8E6C9" stroke-width="2.5"/>
+                <ellipse cx="429" cy="170" rx="4" ry="6" fill="#4E342E" transform="rotate(-30 429 170)"/>
+
+                <!-- Pistil -->
+                <line x1="468" y1="205" x2="468" y2="148" stroke="#A5D6A7" stroke-width="3.5"/>
+                <ellipse cx="468" cy="146" rx="5" ry="4" fill="#66BB6A"/>
+              </g>
+
+              <!-- ==================== FRONT LEAVES ==================== -->
+              <!-- Left front leaf -->
+              <path d="M 255,420 C 195,400 150,370 122,330 C 162,328 210,360 255,420 Z" 
+                    fill="url(#leaf-g)"/>
+              <path d="M 255,420 C 200,395 155,365 122,330" stroke="#1B5E20" stroke-width="1.5" fill="none"/>
+
+              <!-- Right front leaf -->
+              <path d="M 345,415 C 405,395 450,365 478,325 C 438,323 390,355 345,415 Z" 
+                    fill="url(#leaf-g)"/>
+              <path d="M 345,415 C 400,390 445,360 478,325" stroke="#1B5E20" stroke-width="1.5" fill="none"/>
+
+              <!-- Left lower leaf -->
+              <path d="M 270,490 C 215,475 168,448 140,410 C 178,408 228,438 270,490 Z" 
+                    fill="url(#leaf-g)" opacity="0.95"/>
+
+              <!-- Right lower leaf -->
+              <path d="M 330,488 C 385,472 432,445 460,407 C 422,405 372,435 330,488 Z" 
+                    fill="url(#leaf-g)" opacity="0.95"/>
+
+              <!-- ==================== CENTER FRONT FLOWER (facing viewer) ==================== -->
+              <g filter="url(#glow-shadow)">
+
+                <!-- Back layer petals (smaller, darker, behind) -->
+                <!-- Top-left back petal -->
+                <path d="M 300,258 C 265,225 248,180 255,135 C 272,162 284,205 300,258 Z" 
+                      fill="url(#pg-back)" opacity="0.88"/>
+                <!-- Top-right back petal -->
+                <path d="M 300,258 C 335,224 352,178 345,133 C 328,161 316,204 300,258 Z" 
+                      fill="url(#pg-back)" opacity="0.88"/>
+                <!-- Bottom-left back petal -->
+                <path d="M 296,262 C 252,262 215,248 192,220 C 220,215 258,232 296,262 Z" 
+                      fill="url(#pg-back)" opacity="0.85"/>
+                <!-- Bottom-right back petal -->
+                <path d="M 304,262 C 348,262 385,248 408,220 C 380,215 342,232 304,262 Z" 
+                      fill="url(#pg-back)" opacity="0.85"/>
+
+                <!-- FRONT PETALS (main, bright yellow, prominent) -->
+
+                <!-- Top center petal - sweeps up gracefully -->
+                <path d="M 300,258 
+                         C 275,230 262,195 260,155 
+                         C 268,148 280,148 290,152 
+                         C 302,130 310,128 318,152 
+                         C 328,148 336,148 340,158 
+                         C 338,195 325,230 300,258 Z" 
+                      fill="url(#pg-main)" filter="url(#soft-shadow)"/>
+                <!-- Vein on top petal -->
+                <path d="M 300,255 Q 298,205 300,155" stroke="#E65100" stroke-width="2" fill="none" opacity="0.4"/>
+
+                <!-- Bottom-left petal - sweeps lower left -->
+                <path d="M 297,265 
+                         C 270,272 240,280 210,268 
+                         C 202,260 200,248 205,238 
+                         C 188,230 182,220 186,210 
+                         C 210,218 240,248 297,265 Z" 
+                      fill="url(#pg-main)" filter="url(#soft-shadow)"/>
+                <path d="M 297,265 Q 248,250 186,210" stroke="#E65100" stroke-width="2" fill="none" opacity="0.4"/>
+
+                <!-- Bottom-right petal - sweeps lower right -->
+                <path d="M 303,265 
+                         C 330,272 360,280 390,268 
+                         C 398,260 400,248 395,238 
+                         C 412,230 418,220 414,210 
+                         C 390,218 360,248 303,265 Z" 
+                      fill="url(#pg-main)" filter="url(#soft-shadow)"/>
+                <path d="M 303,265 Q 352,250 414,210" stroke="#E65100" stroke-width="2" fill="none" opacity="0.4"/>
+
+                <!-- Upper-left petal - curves up and left -->
+                <path d="M 293,258 
+                         C 262,242 238,215 228,182 
+                         C 238,175 250,177 260,184 
+                         C 265,165 275,158 285,162 
+                         C 292,192 294,222 293,258 Z" 
+                      fill="url(#pg-main)" filter="url(#soft-shadow)"/>
+
+                <!-- Upper-right petal - curves up and right -->
+                <path d="M 307,258 
+                         C 338,242 362,215 372,182 
+                         C 362,175 350,177 340,184 
+                         C 335,165 325,158 315,162 
+                         C 308,192 306,222 307,258 Z" 
+                      fill="url(#pg-main)" filter="url(#soft-shadow)"/>
+
+                <!-- Bottom petal going straight down, slightly curled -->
+                <path d="M 300,268 
+                         C 278,278 262,298 260,325 
+                         C 272,330 286,328 300,322 
+                         C 314,328 328,330 340,325 
+                         C 338,298 322,278 300,268 Z" 
+                      fill="url(#pg-curl)" filter="url(#soft-shadow)"/>
+                <path d="M 300,270 Q 300,300 300,320" stroke="#FF8F00" stroke-width="2" fill="none" opacity="0.4"/>
+
+                <!-- Throat - the beautiful green/orange center -->
+                <ellipse cx="300" cy="260" rx="28" ry="24" fill="url(#throat-g)"/>
+                <ellipse cx="300" cy="260" rx="18" ry="15" fill="#388E3C" opacity="0.7"/>
+                <ellipse cx="300" cy="260" rx="10" ry="8" fill="#2E7D32"/>
+
+                <!-- Dark spots near center (characteristic of lilies) -->
+                <circle cx="280" cy="255" r="2.5" fill="#BF360C" opacity="0.7"/>
+                <circle cx="285" cy="268" r="2" fill="#BF360C" opacity="0.65"/>
+                <circle cx="275" cy="264" r="1.8" fill="#BF360C" opacity="0.6"/>
+                <circle cx="320" cy="255" r="2.5" fill="#BF360C" opacity="0.7"/>
+                <circle cx="315" cy="268" r="2" fill="#BF360C" opacity="0.65"/>
+                <circle cx="325" cy="263" r="1.8" fill="#BF360C" opacity="0.6"/>
+                <circle cx="300" cy="248" r="2.2" fill="#BF360C" opacity="0.6"/>
+                <circle cx="295" cy="274" r="2" fill="#BF360C" opacity="0.6"/>
+                <circle cx="305" cy="274" r="2" fill="#BF360C" opacity="0.6"/>
+
+                <!-- Stamens: long, curved, with anthers -->
+                <!-- Bottom-left stamen -->
+                <path d="M 300,258 Q 268,240 252,215" stroke="#DCEDC8" stroke-width="3" fill="none" stroke-linecap="round"/>
+                <ellipse cx="250" cy="213" rx="5" ry="9" fill="#3E2723" transform="rotate(-30 250 213)"/>
+
+                <!-- Left stamen -->
+                <path d="M 300,258 Q 268,248 248,232" stroke="#DCEDC8" stroke-width="3" fill="none" stroke-linecap="round"/>
+                <ellipse cx="246" cy="230" rx="5" ry="9" fill="#4E342E" transform="rotate(-45 246 230)"/>
+
+                <!-- Upper-left stamen -->
+                <path d="M 300,258 Q 278,228 272,200" stroke="#DCEDC8" stroke-width="3" fill="none" stroke-linecap="round"/>
+                <ellipse cx="271" cy="198" rx="5" ry="9" fill="#3E2723" transform="rotate(-15 271 198)"/>
+
+                <!-- Top stamen -->
+                <path d="M 300,258 Q 300,228 300,200" stroke="#DCEDC8" stroke-width="3" fill="none" stroke-linecap="round"/>
+                <ellipse cx="300" cy="198" rx="5" ry="9" fill="#4E342E"/>
+
+                <!-- Upper-right stamen -->
+                <path d="M 300,258 Q 322,228 328,200" stroke="#DCEDC8" stroke-width="3" fill="none" stroke-linecap="round"/>
+                <ellipse cx="329" cy="198" rx="5" ry="9" fill="#3E2723" transform="rotate(15 329 198)"/>
+
+                <!-- Right stamen -->
+                <path d="M 300,258 Q 332,248 352,232" stroke="#DCEDC8" stroke-width="3" fill="none" stroke-linecap="round"/>
+                <ellipse cx="354" cy="230" rx="5" ry="9" fill="#4E342E" transform="rotate(45 354 230)"/>
+
+                <!-- Bottom-right stamen -->
+                <path d="M 300,258 Q 332,240 348,215" stroke="#DCEDC8" stroke-width="3" fill="none" stroke-linecap="round"/>
+                <ellipse cx="350" cy="213" rx="5" ry="9" fill="#3E2723" transform="rotate(30 350 213)"/>
+
+                <!-- Pistil (long, central) -->
+                <path d="M 300,258 Q 302,230 303,195" stroke="#A5D6A7" stroke-width="4.5" fill="none" stroke-linecap="round"/>
+                <ellipse cx="303" cy="193" rx="7" ry="5" fill="#81C784"/>
+              </g>
+
+              <!-- ==================== SMALL HALF-OPEN BUD LEFT ==================== -->
+              <g filter="url(#soft-shadow)">
+                <path d="M 198,215 C 170,198 152,165 158,130 C 172,150 182,180 198,215 Z" fill="#4CAF50"/>
+                <path d="M 198,215 C 218,196 228,162 222,127 C 210,148 204,178 198,215 Z" fill="#388E3C"/>
+                <!-- Petal tips showing -->
+                <path d="M 197,213 C 175,192 165,163 172,132 C 182,153 188,183 197,213 Z" fill="#FFD54F"/>
+                <path d="M 199,213 C 220,191 228,161 220,130 C 210,151 205,182 199,213 Z" fill="#FFC107"/>
+                <ellipse cx="198" cy="129" rx="13" ry="8" fill="#66BB6A"/>
+              </g>
+
+              <!-- ==================== SMALL HALF-OPEN BUD RIGHT ==================== -->
+              <g filter="url(#soft-shadow)">
+                <path d="M 402,208 C 374,191 356,158 362,123 C 376,143 386,173 402,208 Z" fill="#4CAF50"/>
+                <path d="M 402,208 C 422,189 432,155 426,120 C 414,141 408,171 402,208 Z" fill="#388E3C"/>
+                <path d="M 401,206 C 378,185 370,156 377,125 C 387,146 393,176 401,206 Z" fill="#FFD54F"/>
+                <path d="M 403,206 C 424,184 432,154 424,123 C 414,144 409,175 403,206 Z" fill="#FFC107"/>
+                <ellipse cx="402" cy="122" rx="13" ry="8" fill="#66BB6A"/>
+              </g>
+
             </svg>
             <div class="message">Para ti, Barby 💛</div>
         </div>
