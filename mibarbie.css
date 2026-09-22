@@ -5,7 +5,7 @@ body, html {
     padding: 0;
     width: 100%;
     height: 100%;
-    background: radial-gradient(ellipse at center, #ffb6d9 0%, #ff69b4 50%, #ff1493 100%);
+    background: radial-gradient(ellipse at center, #FFD6EC 0%, #FF69B4 45%, #F20E7B 100%);
     overflow: hidden;
     font-family: 'Pacifico', cursive;
     display: flex;
@@ -38,7 +38,7 @@ body, html {
     left: 50%;
     cursor: pointer;
     pointer-events: auto;
-    color: #8BC34A; /* Verde inicial */
+    color: #7dba38; /* Verde inicial */
     text-shadow: 2px 2px 4px rgba(0,0,0,0.2), 0 0 10px #4CAF50;
     transition: color 0.5s ease, text-shadow 0.5s ease, top 1.5s ease-in-out, left 1.5s ease-in-out, opacity 1.5s ease-in-out, transform 1.5s ease-in-out;
 }
